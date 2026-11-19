@@ -4,187 +4,511 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Music Junkie Beach Events</title>
+<meta http-equiv="refresh" content="300">
+<title>Music Junkie Beach | Weekly Events</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Cinzel:wght@500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-* { box-sizing: border-box; }
+:root {
+  --gold: #e9b74f;
+  --lightgold: #ffe7a0;
+  --dark: #120a05;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
+
 body {
-  margin: 0;
-  background: #17100b;
-  color: #f4deb0;
-  font-family: Arial, sans-serif;
+  background: #080604;
+  color: #fff0cb;
+  font-family: Georgia, serif;
 }
-header {
+
+.board {
+  width: 100%;
+  min-height: 100vh;
+  border: 12px ridge #a96a23;
+  box-shadow:
+    inset 0 0 0 3px #ffd16d,
+    inset 0 0 35px #000;
+  background:
+    linear-gradient(#1c0e06, #080503);
+  overflow: hidden;
+}
+
+.hero {
+  position: relative;
+  min-height: 235px;
+  padding: 35px 18px 22px;
   text-align: center;
-  padding: 18px 12px 12px;
-  background: #382213;
-  border-bottom: 3px solid #bd8739;
+  background:
+    radial-gradient(
+      ellipse at 50% 80%,
+      #ffbd36 0%,
+      #dc641b 20%,
+      #7b2711 46%,
+      #170c0b 78%
+    );
+  border-bottom: 5px ridge #d99a37;
 }
-h1 {
+
+.hero::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40%;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 8px,
+      rgba(255,180,50,.12) 9px 10px
+    ),
+    linear-gradient(
+      transparent,
+      #08212a 50%,
+      #080c0e
+    );
+  opacity: .85;
+}
+
+.palm {
+  position: absolute;
+  top: 0;
+  font-size: 65px;
+  opacity: .9;
+  z-index: 1;
+}
+
+.palm.left {
+  left: 15px;
+}
+
+.palm.right {
+  right: 15px;
+  transform: scaleX(-1);
+}
+
+.logo {
+  position: relative;
+  z-index: 2;
   margin: 0;
-  color: #ffd78a;
-  font-size: 38px;
+  font-family: "Kaushan Script", cursive;
+  font-size: clamp(40px, 6.7vw, 100px);
+  line-height: 1.3;
+  white-space: nowrap;
+  letter-spacing: -2px;
+  color: #ffd477;
+  background:
+    linear-gradient(
+      #fff6c8 5%,
+      #ffd976 30%,
+      #b96a16 65%,
+      #ffe19a 85%,
+      #8e460e 100%
+    );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter:
+    drop-shadow(2px 3px 0 #4c2307)
+    drop-shadow(4px 5px 1px #000);
+}
+
+.tagline {
+  position: relative;
+  z-index: 2;
+  margin-top: 14px;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: clamp(10px, 1.8vw, 23px);
+  font-weight: 700;
   letter-spacing: 3px;
+  color: var(--lightgold);
+  text-shadow: 2px 3px 3px #000;
 }
-.subtitle {
-  margin-top: 7px;
-  font-size: 17px;
-}
-h2 {
-  margin: 12px 0;
+
+.heading {
+  padding: 12px;
   text-align: center;
-  color: #ffd78a;
-  font-size: 25px;
+  font-family: "Cinzel", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(24px, 4.5vw, 58px);
+  letter-spacing: 5px;
+  color: var(--lightgold);
+  text-shadow:
+    2px 2px 0 #9b4b08,
+    4px 5px 4px #000;
+  border-bottom: 3px solid #a96a23;
+  background: #110904;
 }
-#status {
+
+.status {
   text-align: center;
-  padding: 8px;
-  color: #bda982;
-  font-size: 13px;
+  font-size: 14px;
+  color: #bda581;
+  padding: 6px;
 }
+
+.schedule {
+  padding: 10px 14px 18px;
+}
+
 .day {
-  margin: 7px 15px;
-  border: 1px solid #73532c;
-  background: #281b11;
+  display: grid;
+  grid-template-columns: 22% 78%;
+  margin-bottom: 7px;
+  border: 2px solid #9d6422;
+  border-radius: 5px;
+  background: linear-gradient(
+    90deg,
+    #080503,
+    #29170a 60%,
+    #0d0704
+  );
+  box-shadow: inset 0 0 10px #000;
 }
-.day-title {
-  padding: 8px 12px;
-  background: #4c301b;
-  color: #ffd78a;
-  font-size: 19px;
-  font-weight: bold;
+
+.day.today {
+  border-color: #ffe49a;
+  box-shadow:
+    0 0 12px rgba(255,196,74,.4),
+    inset 0 0 10px #000;
 }
+
+.day-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 5px;
+  border-right: 2px solid #9d6422;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: clamp(11px, 1.8vw, 25px);
+  font-weight: 700;
+  color: #ffd16a;
+  text-align: center;
+  text-shadow: 2px 2px 3px #000;
+}
+
+.day-events {
+  min-width: 0;
+}
+
 .event {
   display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 10px;
-  padding: 8px 12px;
-  border-top: 1px solid #5d432b;
-  font-size: 17px;
+  grid-template-columns: 33% 25% 42%;
+  align-items: center;
+  gap: 0;
+  min-height: 49px;
+  border-bottom: 1px solid #6b421e;
 }
-.time {
-  color: #f7c96b;
+
+.event:last-child {
+  border-bottom: 0;
+}
+
+.event > div {
+  padding: 8px 10px;
+  overflow-wrap: anywhere;
+}
+
+.event .time {
+  color: #fff0c9;
+  font-size: clamp(11px, 1.5vw, 21px);
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.event .artist {
+  color: #ffd16a;
+  font-size: clamp(12px, 1.8vw, 25px);
   font-weight: bold;
 }
-.genre {
-  color: #c7b99f;
-  font-size: 14px;
-  margin-top: 3px;
+
+.event .genre {
+  color: #e7d8ba;
+  font-size: clamp(11px, 1.4vw, 19px);
 }
+
+.event.live {
+  background: rgba(167,87,15,.24);
+}
+
+.live-label {
+  color: #ffe27a;
+  font-size: .8em;
+  margin-left: 5px;
+}
+
 .empty {
-  padding: 8px 12px;
-  color: #9b8a72;
+  padding: 12px;
+  color: #8f7859;
   font-style: italic;
 }
-footer {
-  text-align: center;
+
+.footer {
   padding: 12px;
-  color: #d6b879;
-  font-style: italic;
+  text-align: center;
+  border-top: 3px ridge #b67c2a;
+  color: #e7c17b;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  background: #160c05;
+}
+
+@media (max-width: 700px) {
+  .board {
+    border-width: 6px;
+  }
+
+  .hero {
+    min-height: 150px;
+    padding: 30px 8px 15px;
+  }
+
+  .palm {
+    font-size: 30px;
+  }
+
+  .tagline {
+    letter-spacing: 1px;
+  }
+
+  .heading {
+    letter-spacing: 2px;
+  }
+
+  .schedule {
+    padding: 5px;
+  }
+
+  .day {
+    grid-template-columns: 28% 72%;
+  }
+
+  .event {
+    grid-template-columns: 1fr;
+  }
+
+  .event > div {
+    padding: 3px 8px;
+  }
+
+  .event .time {
+    white-space: normal;
+  }
 }
 </style>
 </head>
+
 <body>
+<div class="board">
 
-<header>
-  <h1>MUSIC JUNKIE BEACH</h1>
-  <div class="subtitle">Different Genres, One Love Music</div>
-</header>
+  <header class="hero">
+    <div class="palm left">🌴</div>
+    <div class="palm right">🌴</div>
 
-<h2>WEEKLY EVENTS</h2>
-<div id="status"></div>
-<main id="schedule"></main>
-<footer>All times in SLT</footer>
+    <h1 class="logo">Music Junkie Beach</h1>
+
+    <div class="tagline">
+      Different Genres, One Love Music
+    </div>
+  </header>
+
+  <div class="heading">
+    WEEKLY EVENTS
+  </div>
+
+  <div class="status" id="status"></div>
+
+  <main class="schedule" id="schedule"></main>
+
+  <footer class="footer">
+    ALL TIMES IN SLT
+  </footer>
+
+</div>
 
 <script>
-const days = [
-  "Monday", "Tuesday", "Wednesday",
-  "Thursday", "Friday", "Saturday", "Sunday"
+"use strict";
+
+const DAYS = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday"
 ];
 
+let events = [];
+
 function formatTime(minutes) {
-  const hour24 = Math.floor(minutes / 60);
-  const minute = minutes % 60;
-  const hour12 = hour24 % 12 || 12;
-  const suffix = hour24 >= 12 ? "PM" : "AM";
-  return hour12 + "." +
-    String(minute).padStart(2, "0") + " " + suffix;
+  const n = Number(minutes);
+  if (!Number.isFinite(n)) return "";
+
+  const h24 = Math.floor(n / 60) % 24;
+  const min = ((n % 60) + 60) % 60;
+  const h12 = h24 % 12 || 12;
+  const suffix = h24 >= 12 ? "PM" : "AM";
+
+  return h12 + "." +
+    String(min).padStart(2, "0") +
+    " " + suffix;
 }
 
-function render(events) {
-  const schedule = document.getElementById("schedule");
-  schedule.replaceChildren();
+function slNow() {
+  const formatter = new Intl.DateTimeFormat(
+    "en-US",
+    {
+      timeZone: "America/Los_Angeles",
+      weekday: "long",
+      hour: "numeric",
+      minute: "numeric",
+      hourCycle: "h23"
+    }
+  );
+
+  const parts = formatter.formatToParts(new Date());
+  const values = {};
+
+  for (const p of parts) {
+    values[p.type] = p.value;
+  }
+
+  return {
+    day: DAYS.indexOf(values.weekday),
+    minute:
+      Number(values.hour) * 60 +
+      Number(values.minute)
+  };
+}
+
+function element(tag, className, content) {
+  const node = document.createElement(tag);
+
+  if (className) node.className = className;
+  if (content !== undefined) node.textContent = content;
+
+  return node;
+}
+
+function render() {
+  const container = document.getElementById("schedule");
+  const now = slNow();
+
+  container.replaceChildren();
 
   for (let day = 0; day < 7; day++) {
-    const section = document.createElement("section");
-    section.className = "day";
+    const section = element(
+      "section",
+      "day" + (now.day === day ? " today" : "")
+    );
 
-    const heading = document.createElement("div");
-    heading.className = "day-title";
-    heading.textContent = days[day];
-    section.appendChild(heading);
+    section.appendChild(
+      element("div", "day-name", DAYS[day])
+    );
+
+    const dayEvents = element("div", "day-events");
 
     const entries = events
       .filter(e => Number(e.day) === day)
       .sort((a, b) => Number(a.start) - Number(b.start));
 
-    if (!entries.length) {
-      const empty = document.createElement("div");
-      empty.className = "empty";
-      empty.textContent = "No events scheduled";
-      section.appendChild(empty);
+    if (entries.length === 0) {
+      dayEvents.appendChild(
+        element("div", "empty", "No events scheduled")
+      );
     }
 
     for (const event of entries) {
-      const row = document.createElement("div");
-      row.className = "event";
+      const start = Number(event.start);
+      const end = Number(event.end);
 
-      const time = document.createElement("div");
-      time.className = "time";
-      time.textContent =
-        formatTime(Number(event.start)) + " - " +
-        formatTime(Number(event.end));
+      const live =
+        now.day === day &&
+        now.minute >= start &&
+        now.minute < end;
 
-      const details = document.createElement("div");
-      const name = document.createElement("strong");
-      name.textContent = event.artist || "";
+      const row = element(
+        "div",
+        "event" + (live ? " live" : "")
+      );
 
-      const genre = document.createElement("div");
-      genre.className = "genre";
-      genre.textContent = event.genre || "";
+      const time = element(
+        "div",
+        "time",
+        formatTime(start) + " - " + formatTime(end)
+      );
 
-      details.append(name, genre);
-      row.append(time, details);
-      section.appendChild(row);
+      if (live) {
+        time.appendChild(
+          element("span", "live-label", "● LIVE")
+        );
+      }
+
+      row.appendChild(time);
+
+      row.appendChild(
+        element("div", "artist", String(event.artist || ""))
+      );
+
+      row.appendChild(
+        element("div", "genre", String(event.genre || ""))
+      );
+
+      dayEvents.appendChild(row);
     }
 
-    schedule.appendChild(section);
+    section.appendChild(dayEvents);
+    container.appendChild(section);
   }
 }
 
-async function update() {
+async function loadEvents() {
+  const status = document.getElementById("status");
+
   try {
     const response = await fetch(
-      "events.json?t=" + Date.now(),
+      "./events.json?t=" + Date.now(),
       { cache: "no-store" }
     );
 
-    if (!response.ok) throw new Error("No event data");
+    if (!response.ok) {
+      throw new Error("Event data unavailable");
+    }
 
-    const events = await response.json();
-    if (!Array.isArray(events)) throw new Error("Invalid data");
+    const data = await response.json();
 
-    render(events);
-    document.getElementById("status").textContent = "";
+    if (!Array.isArray(data)) {
+      throw new Error("Invalid event data");
+    }
+
+    events = data;
+    status.textContent = "";
   } catch (error) {
-    render([]);
-    document.getElementById("status").textContent =
+    status.textContent =
       "Waiting for event data";
   }
+
+  render();
 }
 
-update();
-setInterval(update, 60000);
-</script>
+loadEvents();
 
+setInterval(loadEvents, 60000);
+setInterval(render, 30000);
+</script>
 </body>
 </html>
